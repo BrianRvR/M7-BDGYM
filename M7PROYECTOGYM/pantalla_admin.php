@@ -67,7 +67,7 @@
               <li class="nav-item">
                   <a href="pantalla_admin.php" class="nav-link">
                     <i class="mdi mdi-grid menu-icon"></i>
-                    <span class="menu-title">Tables</span>
+                    <span class="menu-title">Tablas</span>
                     <i class="menu-arrow"></i>
                   </a>
               </li>
