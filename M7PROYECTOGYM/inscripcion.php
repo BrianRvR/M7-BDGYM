@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registro de Actividades</title>
+    <title>Inscripción</title>
         <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="Bootstrap/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
