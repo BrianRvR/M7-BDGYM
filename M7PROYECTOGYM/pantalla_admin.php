@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Kapella Bootstrap Admin Dashboard Template</title>
+  <title>Panel Admin</title>
   <!-- base:css -->
   <link rel="stylesheet" href="BootstrapPanelAdmin/template/vendors/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="BootstrapPanelAdmin/template/vendors/base/vendor.bundle.base.css">
