@@ -27,7 +27,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-12 doc-header">
-                <a class="btn btn-success" href="../../../pantalla_admin.php"><i class="mdi mdi-home me-2"></i>Volver al Menu</a>
+                <a class="btn btn-success" href="../../../PantallaAdmin/pantalla_admin.php"><i class="mdi mdi-home me-2"></i>Volver al Menu</a>
                 <h1 class="text-primary mt-4">Información</h1>
               </div>
             </div>
