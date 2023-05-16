@@ -34,6 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['eliminar_socio'])) {
     $sql_DeleteSocio = "DELETE FROM Socios WHERE dni = '$socioDNI'";
     if ($conn->query($sql_DeleteSocio) === TRUE) {
         //echo "El socio ha sido eliminado exitosamente.";
+        header("Location: pantalla_admin.php");
+      exit;
     } else {
         echo "Error al eliminar el socio: " . $conn->error;
     }
@@ -46,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['eliminar_inscripcion'])
     $sql_DeleteInscripcion = "DELETE FROM Inscripcion WHERE id = $inscripcionId";
     if ($conn->query($sql_DeleteInscripcion) === TRUE) {
         //echo "La inscripción ha sido eliminada exitosamente.";
+        header("Location: pantalla_admin.php");
+      exit;
     } else {
         echo "Error al eliminar la inscripción: " . $conn->error;
     }
@@ -63,66 +67,90 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['eliminar_actividad'])) 
         echo "Error al eliminar la actividad: " . $conn->error;
     }
 }
-// Verificar si se envió una solicitud de edición de socio
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['editar_socio'])) {
-    $socioDNI = $_POST['dni'];
-    $nuevoNombre = $_POST['nombre'];
-    $nuevoApellido = $_POST['apellido'];
 
-    $sql_UpdateSocio = "UPDATE Socios SET nombre_apellidos = '$nuevoNombre', correo = '$nuevoCorreo', telefono = '$nuevoTelefono' WHERE dni = '$socioDNI'";
-    if ($conn->query($sql_UpdateSocio) === TRUE) {
-        //echo "El socio ha sido actualizado exitosamente.";
-    } else {
-        echo "Error al actualizar el socio: " . $conn->error;
+// Verificar si se envió una solicitud de edición de socio
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['dni'])) {
+    $socioDNI = $_POST['dni'];
+    $nuevoNombre = $_POST['nombre_apellidos'];
+    $nuevoCorreo = $_POST['correo'];
+    $nuevoTelefono = $_POST['telefono'];
+    $nuevaContraseña = $_POST['contraseña'];
+  
+    // Realizar la conexión a la base de datos
+    $conn = new mysqli("localhost", "root", "", "BD_GYM");
+  
+    // Verificar la conexión
+    if ($conn->connect_error) {
+      die("Error de conexión: " . $conn->connect_error);
     }
-}
+  
+    $dni_original = $_POST['dni_original']; // Obtener el valor del campo "dni_original"
+  
+    $sql_UpdateSocio = "UPDATE Socios SET nombre_apellidos = '$nuevoNombre', correo = '$nuevoCorreo', telefono = '$nuevoTelefono', contraseña = '$nuevaContraseña' WHERE dni = '$dni_original'";
+    if ($conn->query($sql_UpdateSocio) === TRUE) {
+      header("Location: pantalla_admin.php");
+      exit;
+    } else {
+      echo "Error al actualizar el socio: " . $conn->error;
+    }
+  
+    // Cerrar la conexión
+    $conn->close();
+  }
 
 // Verificar si se envió una solicitud de edición de inscripción
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['editar_inscripcion'])) {
-    $inscripcionId = $_POST['id'];
-    $nuevoDNI = $_POST['dni'];
-    $nuevoNombreActividad = $_POST['nombre_actividad'];
+    $inscripcionId = $_POST['id_inscripcion'];
+    $nuevoDNI = $_POST['dni_inscripcion'];
+    $nuevoNombreActividad = $_POST['nombre_actividad_inscripcion'];
     $nuevaFechaInscripcion = $_POST['fecha_inscripcion'];
+
+    // Realizar la conexión a la base de datos
+    $conn = new mysqli("localhost", "root", "", "BD_GYM");
+
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Error de conexión: " . $conn->connect_error);
+    }
 
     $sql_UpdateInscripcion = "UPDATE Inscripcion SET dni = '$nuevoDNI', nombre_actividad = '$nuevoNombreActividad', fecha_inscripcion = '$nuevaFechaInscripcion' WHERE id = $inscripcionId";
     if ($conn->query($sql_UpdateInscripcion) === TRUE) {
-        //echo "La inscripción ha sido actualizada exitosamente.";
+        header("Location: pantalla_admin.php");
+        exit;
     } else {
         echo "Error al actualizar la inscripción: " . $conn->error;
     }
+
+    // Cerrar la conexión
+    $conn->close();
 }
+
 
 // Verificar si se envió una solicitud de edición de actividad
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['editar_actividad'])) {
     $nombreActividad = $_POST['editar_actividad'];
-    $nuevoNombreActividad = $_POST['nuevo_nombre_actividad'];
+    $nuevoNombreActividad = !empty($_POST['nuevo_nombre_actividad']) ? $_POST['nuevo_nombre_actividad'] : $nombreActividad;
     $nuevaHoraActividad = $_POST['nueva_hora_actividad'];
 
-    $sql_UpdateActividad = "UPDATE Actividades SET nombre_actividad = '$nuevoNombreActividad', hora_actividad = '$nuevaHoraActividad' WHERE nombre_actividad = '$nombreActividad'";
-    if ($conn->query($sql_UpdateActividad) === TRUE) {
+    // Realizar la conexión a la base de datos
+    $conn = new mysqli("localhost", "root", "", "BD_GYM");
+
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Error de conexión: " . $conn->connect_error);
+    }
+
+    $sql_UpdateActividad = "UPDATE Actividades SET nombre_actividad = ?, hora_actividad = ? WHERE nombre_actividad = ?";
+    $stmt = $conn->prepare($sql_UpdateActividad);
+    $stmt->bind_param("sss", $nuevoNombreActividad, $nuevaHoraActividad, $nombreActividad);
+    if ($stmt->execute()) {
         // Redirigir a pantalla_admin.php
         header("Location: pantalla_admin.php");
         exit;
     } else {
         echo "Error al actualizar la actividad: " . $conn->error;
     }
-}
-
-// Verificar si se envió una solicitud de edición de actividad
-if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['editar_actividad'])) {
-    $nombreActividad = $_GET['editar_actividad'];
-
-    // Obtener los datos actuales de la actividad
-    $sql_GetActividad = "SELECT * FROM Actividades WHERE nombre_actividad = '$nombreActividad'";
-    $result_GetActividad = $conn->query($sql_GetActividad);
-    if ($result_GetActividad->num_rows > 0) {
-        $actividad = $result_GetActividad->fetch_assoc();
-    } else {
-        echo "No se encontró la actividad: " . $conn->error;
-        exit;
-    }
-
-    
+    $stmt->close();
 }
 
 function agregarActividad($nombre, $hora) {
@@ -137,7 +165,7 @@ function agregarActividad($nombre, $hora) {
     }
 }
 
-// Verificar si se envió una solicitud de adición de actividad
+// Verificar si se envió una solicitud de adición de actividad y agregamos
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['agregar_actividad'])) {
     $nuevoNombreActividad = $_POST['nuevo_nombre_actividad'];
     $nuevaHoraActividad = $_POST['nueva_hora_actividad'];
