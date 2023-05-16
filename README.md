@@ -27,8 +27,11 @@ Una vez dentro del Formulario de Registro llena los campos requeridos y le darem
 Ahora para Inscribirte lo haremos de la siguiente manera. Nos logeamos con nuestro DNI y contraseña ya creadas,le damos a login.
 ![image](https://user-images.githubusercontent.com/98058479/233941241-218108cd-8f90-43b2-b4d0-aa768434c6e7.png)
 
-Una vez dentro podemos elegir que actividad vas a realizar y marcamos el dia de la inscripción. Le damos a Inscribirse.
-![image](https://user-images.githubusercontent.com/98058479/233941416-4fde22b4-498c-4a64-a526-cbeb9323f41a.png)
+Una vez dentro podemos elegir que actividad vas a realizar o puedes ver las inscripciones que hiciste, bueno marcamos el dia de la inscripción. Le damos a Inscribirse.
+![image](https://github.com/BrianRvR/M7-BDGYM/assets/98058479/ed92bf01-3762-4b69-82eb-8e83af75d32b)
+
+Aqui puedes ver la interficie del cliente al ver sus inscripciones, puedes elegir volver o cerrar sesión.
+![image](https://github.com/BrianRvR/M7-BDGYM/assets/98058479/01bb9f26-a70e-42dd-bc05-5883c371397d)
 
 Nos saldra el siguiente mensaje, le daremos a salir para cerrar la cuenta.
 ![image](https://user-images.githubusercontent.com/98058479/233941876-8bf013a3-7932-41fe-841e-add4ef687588.png)
@@ -38,9 +41,10 @@ En la cuenta Admin nos logeamos como cualquier otra cuenta pero con su usuario a
 
 ![image](https://user-images.githubusercontent.com/98058479/233943684-c4c2b379-64c2-4d95-9d56-77eb9cebda52.png)
 
-Una vez dentro tendremos el siguiente panel, podremos ver los datos de los socios, actividades e incripciones.
-![image](https://user-images.githubusercontent.com/98058479/233944555-d06d908f-e2f7-4009-8887-5e892dd7dca9.png)
-![image](https://user-images.githubusercontent.com/98058479/233944202-b8ab14b4-4603-4f46-a5e9-9fd359e23ffd.png)
+Una vez dentro tendremos el siguiente panel, podremos ver los datos de los socios, actividades e incripciones, podremos editar la informacion, eliminar y en el caso de las actividades agregar.
+![image](https://github.com/BrianRvR/M7-BDGYM/assets/98058479/a9d1ba10-16ad-418f-97b0-108537ba2d79)
+![image](https://github.com/BrianRvR/M7-BDGYM/assets/98058479/cc7aec5f-3865-4d99-9a33-82e924e70a46)
+
 
 Podremos ver la Documentacion en donde nos aparece informacion basica del gimnasio Azure con un boton en donde podremos volver al menú.
 ![image](https://user-images.githubusercontent.com/98058479/233944862-713dcaa0-825d-4b92-9f0b-5a7f46512974.png)
